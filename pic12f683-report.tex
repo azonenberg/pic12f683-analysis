@@ -307,25 +307,80 @@ Several of the 20x overview scans are shown in this section as representative ex
 \label{substrate}
 \end{figure}
 
-\FloatBarrier
-\pagebreak
+\clearpage
 \section{Device Floorplan Analysis}
 
+\subsection{Overview}
+
+The overall die size measured at the seal ring is 1.945 x 2.166 mm or 4.212 $mm^2$. Approximately 23 \unit{\micro\meter} of margin was present between the edge of the seal ring and the edge of the die (post dicing) for a physical die size of 1.991 x 2.212 mm or 4.404 $mm^2$.
+
+A high level floorplan of the device at the substrate layer is shown in Fig. \ref{floorplan}. Key features of note:
+
+\begin{itemize}
+\item 128 byte SRAM (\autoref{sec:sram}), approximately 0.093 $mm^2$ / x 2.2 \% of die area
+\item 256 byte EEPROM (\autoref{sec:eeprom}), approximately 0.139 $mm^2$ / 3.3 \% of die area
+\item 2048 word Flash (\autoref{sec:flash}), approximately 0.649 $mm^2$ / 15.4 \% of die area
+\item Configuration register (\autoref{sec:cfgreg}), approximately 0.101 $mm^2$ / x 2.4 \% of die area
+\item CPU core (\autoref{sec:cpu}), approximately 0.295 $mm^2$ / x 7.0 \% of die area
+\item 10-bit SAR ADC, approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 1 (tentatively 8 MHz HFINTOSC RC oscillator and output divider), approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 2 (tentatively external crystal oscillator), approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 3 (tentatively 31 kHz LFINTOSC RC oscillator), approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 4 (function unknown), approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 5 (function unknown), approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 6 (function unknown), approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 7 (function unknown), approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 8 (function unknown), approximately x $mm^2$ / x \% of die area
+\item Analog circuit block 9 (function unknown), approximately x $mm^2$ / x \% of die area
+\item Large metal-insulator-metal (MIM) decoupling capacitors in each corner
+\item GPIO pads and I/O buffers GP0-GP5
+\item Single Vdd pad
+\item Single Vss pad
+\item Standard-cell digital logic, approximately 1.334 $mm^2$ / 31.6 \% of die area
+\end{itemize}
+
+\begin{figure}[h]
+\includegraphics[width=16cm,keepaspectratio]{images/floorplan.jpg}
+\caption{Full-die floorplan. Mitutoyo 20x/0.42 objective, multi frame stitch.}
+\label{floorplan}
+\end{figure}
+
 \FloatBarrier
-\pagebreak
+\subsection{Analog Blocks}
+
+Digital circuitry is the author's primary expertise, so the analog blocks were not studied in great detail.
+
+The oscillator blocks were tentatively identified based on their relative size and proximity to the oscillator input pins as well as the presence of large resistors and capacitors consistent with an R-C oscillator. The ADC was identified based on general appearance and the 10-way repetitive digital structure at the northwest consistent with a 10-bit result register.
+
+Analog blocks 4, 5, 6, and 7 are likely related to the comparator (due to their proximity to the comparator input pins), voltage reference, and/or brownout detector.
+
+Analog blocks 8 and 9 are likely related to the power-on reset, brownout detector, and/or programming mode entry.
+
+\subsection{Power Pads}
+
+\subsection{GPIO Pads}
+
+\subsection{MCLR/Vpp Pad}
+
+\clearpage
 \section{SRAM}
+\label{sec:sram}
 
-\pagebreak
+\clearpage
 \section{EEPROM}
+\label{sec:eeprom}
 
-\pagebreak
+\clearpage
 \section{Flash}
+\label{sec:flash}
 
-\pagebreak
+\clearpage
 \section{Configuration Register}
+\label{sec:cfgreg}
 
-\pagebreak
+\clearpage
 \section{CPU Core}
+\label{sec:cpu}
 
 \pagebreak
 \section{Conclusions}
