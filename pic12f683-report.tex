@@ -76,7 +76,7 @@ The PIC12F683 is available in multiple packages; the subject of this report used
 
 \subsection{PCN Search}
 
-A search of vendor PCNs was conducted, which suggested that numerous assembly sites (designated MP3A, MTAI, NSEB, GTK, LPI, UNIS, and MMT) were used to produce this part and it was not possible to identify with certainty which one was used for the samples under test without access to internal Microchip lot traceability information or supplier databases.
+A search of vendor product change notifications (PCNs) was conducted, which suggested that numerous assembly sites (designated MP3A, MTAI, NSEB, GTK, LPI, UNIS, and MMT) were used to produce this part and it was not possible to identify with certainty which one was used for the samples under test without access to internal Microchip lot traceability information or supplier databases.
 
 A new PFAS-free die attach material ``QMI519" was qualified in September 2025\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnid=24234&fileName=PFAS\%20Elimination\%20and\%20Die\%20Attach_Explanation.pdf}{PCN CENO-16EGCZ399}} however the samples used for this analysis had 2023 week 21 date codes and thus presumably were using the older, PFAS-containing, die attach. One PCNs mentioned CRM1076DJ die attach and G770HCD mold compound\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnId=252&affectedcpns=pdf}{PCN CYER-19MGTD414}} for the 4x4 DFN; another mentioned 8600 die attach and G700LTD mold compound\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnid=6667&fileName=PCN_JAON-04FCXY806_Qual\%20Report.pdf}{PCN JAON-04FCXY806}} so any of these are likely candidates. The author's lab capabilities were not sufficient to determine with certainty which was used. Based on these and other PCNs the bond wire material was likely to be palladium coated copper and may or may not have a gold flash over the palladium plating, depending on which assembly site was used\footnote{In the author's experience, older generation PIC12F683s used gold ball bonding. The samples analyzed in this report were copper bonded and PCNs reference both CuPd and CuPdAu bond wire. Without access to SEM+EDS or similar high resolution spectroscopy capabilities, it was not possible to detect the presence or absence of the gold flash layer.}.
 
@@ -121,6 +121,12 @@ Increasingly finer grades (P400, P800, P1200) were used for the final approach t
 final grinding stage to bring the cross section plane into the desired location (bond pads along the east edge of the
 device). Final polishing used 1 \unit{\micro\meter} diamond and 50 \unit{\nano\meter} colloidal alumina.
 
+\begin{figure}[h]
+\includegraphics[width=10cm,keepaspectratio]{images/mount2.jpg}
+\caption{Embedded package sample}
+\label{mount}
+\end{figure}
+
 The polisher being used for the analysis did not have precision tip/tilt adjustment, so it was not possible to get the entire row of bond pads in view simultaneously. The sectioning plane (Fig. \ref{section-plane}) was approximately 1.2\degree off perpendicular to the die; providing excellent views of the pin 5 and 6 wire bonds (Fig. \ref{section}) as well as the metal stackup on the pin 7 and 8 bond pads, however the wire bonds on pins 7 and 8 were not captured by the section.
 
 The section plane was chosen to get as many bond pads as possible in view, however this did mean that the second bonds and solder lands on the leadframe were not visible. This was not judged sufficiently important to justify the effort of preparing a second section with a 90\degree perpendicular plane to the one shown here.
@@ -129,17 +135,11 @@ The die was connected to the leadframe with copper ball bonds (Fig. \ref{bond}).
 
 The die was approximately 200 \unit{\micro\meter} thick and mounted to a 200 \unit{\micro\meter} thick copper thermal paddle by a metal-filled organic adhesive, likely silver epoxy (Fig. \ref{die-attach}). The bond line was approximately 6.7 \unit{\micro\meter} thick and the fillet extended another 8.5 \unit{\micro\meter} above the bottom edge of the die at the left corner.
 
-The bottom surface of the thermal paddle was plated in approximately 13.6 \unit{\micro\meter} of tin (Fig. \ref{paddle-corner}). The plating significantly overhung the paddle at the edges and conformed to the surfaec of the molding compound in the overhang region, suggesting that the leadframe had been bare, or perhaps plated in a thin flash layer of some sort, prior to package assembly and then a thick tin layer was applied after overmolding. A very thin Cu-Sn intermetallic layer was barely visible at the interface but the resolution of the optical microscope (roughly 300 \unit{\nano\meter}) was insufficient to make any remotely accurate measurements of its thickness.
+The bottom surface of the thermal paddle was plated in approximately 13.6 \unit{\micro\meter} of tin (Fig. \ref{paddle-corner}). The plating significantly overhung the paddle at the edges and conformed to the surface of the molding compound in the overhang region, suggesting that the leadframe had been bare, or perhaps plated in a thin flash layer of some sort, prior to package assembly and then a thick tin layer was applied after overmolding. A very thin Cu-Sn intermetallic layer was barely visible at the interface but the resolution of the optical microscope (roughly 300 \unit{\nano\meter}) was insufficient to make any remotely accurate measurements of its thickness.
 
 \begin{figure}[h]
-\includegraphics[width=12cm,keepaspectratio]{images/mount2.jpg}
-\caption{Embedded package sample}
-\label{mount}
-\end{figure}
-
-\begin{figure}[h]
-\includegraphics[width=12cm,keepaspectratio]{images/section-plane.jpg}
-\caption{Approximate plane of the cross section. The camera position for the section is off the right side of the die, looking to the left.}
+\includegraphics[width=15cm,keepaspectratio]{images/section-plane.jpg}
+\caption{Location of the cross section plane on the die. Arrow indicates camera view direction for Fig. \ref{section}.}
 \label{section-plane}
 \end{figure}
 
@@ -170,16 +170,39 @@ The bottom surface of the thermal paddle was plated in approximately 13.6 \unit{
 \FloatBarrier
 \subsection{Partial Decapsulation}
 
+One sample was decapsulated using a 1:1 mixture of 70\% nitric acid and concentrated sulfuric acid after applying a removable masking material to protect the remainder of the package and leadframe. After etching was complete the mask was removed and the sample was cleaned in acetone followed by sonication in Micro 90 detergent solution and rinsing in distilled water.
+
 \begin{figure}[h]
-\includegraphics[width=12cm,keepaspectratio]{images/package-partial.jpg}
-\caption{Package after partial decapsulation}
+\includegraphics[width=10cm,keepaspectratio]{images/package-partial.jpg}
+\caption{Package after partial decapsulation. Pin 1 in the top left corner.}
 \label{package-partial}
 \end{figure}
 
 \begin{figure}[h]
-\includegraphics[width=12cm,keepaspectratio]{images/pins.png}
-\caption{Package after partial decapsulation with pinout annotated}
+\includegraphics[width=10cm,keepaspectratio]{images/pins.png}
+\caption{Same image as Fig. \ref{package-partial} but cropped and with pinout annotated}
 \label{pinout-partial}
+\end{figure}
+
+\FloatBarrier
+The overall condition of the die after decapsulation was excellent, with almost no remaining debris and intact bond pads with little to no discoloration or damage visible (Fig. \ref{pbond0}). Bond wires showed slight pitting but were generally full-diameter and not severely damaged (Fig. \ref{pbond1}). In some cases, the palladium coating was still intact and the surface appeared pristine (Fig. \ref{pbond2}).
+
+\begin{figure}[h]
+\includegraphics[width=7cm,keepaspectratio]{images/pbond0.jpg}
+\caption{Southwest corner of die showing intact bond pad/wire and clean die surface. Mitutoyo 20x/0.42 objective}
+\label{pbond0}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=7cm,keepaspectratio]{images/pbond1.jpg}
+\caption{Pin 4 (MCLR) bond wire showing minimal surface damage. Mitutoyo 20x/0.42 objective}
+\label{pbond1}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=7cm,keepaspectratio]{images/pbond2.jpg}
+\caption{Pin 6 (GP1) bond wire showing partially intact palladium plating. Mitutoyo 5x/0.14 objective}
+\label{pbond2}
 \end{figure}
 
 \FloatBarrier
@@ -190,12 +213,51 @@ The die is made on Microchip's in-house 160K wafer
 technology\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnId=10087&affectedcpns=pdf}{PCN
 KSRA-19MSVX727}} at Fab 4 in Gresham, OR.
 
+\subsection{Stackup}
+
+This is a planarized 350nm class process with three aluminum metal layers and two poly layers (Fig. \ref{xsec-seal}), supporting floating-gate embedded Flash memory. Vias and contacts are tungsten. Inspection of the seal ring in cross section clearly shows all three metal layers connected by vias to each other and the substrate, as well as poly. No connections to poly in the seal ring were visible in the cross section.
+
+All metal layers are approximately equal in thickness and spacing: approximately 1000 \unit{\nano\meter} thick and 800 \unit{\nano\meter} apart, with M1 approximately 1300 \unit{\nano\meter} above the substrate. Poly is approximately 425 \unit{\nano\meter} thick\footnote{Given the 300 \unit{\nano\meter} optical resolution of the microscope, there are large error bounds on all of these measurements.}.
+
 \begin{figure}[h]
 \includegraphics[width=12cm,keepaspectratio]{images/xsec-seal.jpg}
-\caption{Seal ring at edge of die}
+\caption{Cross section of seal ring at edge of die showing poly and M1-M3. Mitutoyo 100x/0.90 objective.}
 \label{xsec-seal}
 \end{figure}
 
+\subsection{Passivation}
+
+The die is covered in a thick orange-colored overglass (Fig. \ref{logic}) which coats the top and sidewalls of metal 3, growing in thickness until the gaps between adjacent conductors are completely filled and only a thin line can be seen between them. This reduces contrast between wires and makes them more difficult to follow, so removal of the passivation is beneficial even for tracing out signals on M3 (compare Fig. \ref{logic} and \ref{vias}).
+
+\subsection{Design rules}
+
+All three metal layers have similar or identical design rules, as is typical for processes of this era (there are not enough layers to dedicate some thin ones to high-density local interconnect and have thicker ones for long-range power and signal routing), with an observed minimum pitch of approximately 1.75 \unit{\micro\meter} and roughly equal conductor size and gap size.
+
+Unlike most more modern processes (in which conductors are relatively constant width even at vias), both the top and bottom conductors have a significantly enlarged annular ring / landing pad at vias (Fig. \ref{vias}). This enables the locations of vias to be inferred from only a metal layer image, without the need to deprocess specifically to a via layer.
+
+Dummy fill for CMP is present on all metal layers. The dummy fill pattern consists of parallel lines the same size as signal conductors (Fig. \ref{dummyfill}), laid out on the same grid as signal conductors, which makes it difficult to distinguish from actual signal routing at first glance. Dummy fill lines are never placed directly adjacent to signal lines (perhaps for crosstalk/coupling reasons); a single routing channel of clearance is always left between dummy fill and active conductors. This, plus the fact that dummy metal is always floating (no vias) is sufficient to allow it to be reliably identified.
+
+Excessively long dummy fill lines (roughly 80 \unit{\micro\meter} and up) have short gaps inserted, as seen in the top center of Fig. \ref{dummyfill}.
+
+\begin{figure}[h]
+\includegraphics[width=12cm,keepaspectratio]{images/logic.jpg}
+\caption{Random area of logic in the device core with intact passivation. Mitutoyo 100x/0.90 objective.}
+\label{logic}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=12cm,keepaspectratio]{images/vias.jpg}
+\caption{Random area of logic with passivation etched away. Mitutoyo 100x/0.90 objective.}
+\label{vias}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=12cm,keepaspectratio]{images/cmpfiller.jpg}
+\caption{Random area of logic with dummy fill lines marked.}
+\label{dummyfill}
+\end{figure}
+
+\FloatBarrier
 \pagebreak
 \section{Device Floorplan Analysis}
 
