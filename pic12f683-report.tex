@@ -90,13 +90,13 @@ The bottom side of the package (Fig. \ref{pkgbot}) had eight tin-plated copper s
 
 \begin{figure}[h]
 \includegraphics[width=10cm,keepaspectratio]{images/pkgtop.jpg}
-\caption{Top view of package. Pin 1 in southwest corner. Mitutoyo 5x/0.14 objective.}
+\caption{Top view of package. Pin 1 in southwest corner. Mitutoyo 5x/0.14 objective, multi frame stitch.}
 \label{pkgtop}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[width=10cm,keepaspectratio]{images/pkgbot.jpg}
-\caption{Bottom view of package. Pin 1 in northwest corner. Mitutoyo 5x/0.14 objective.}
+\caption{Bottom view of package. Pin 1 in northwest corner. Mitutoyo 5x/0.14 objective, multi frame stitch.}
 \label{pkgbot}
 \end{figure}
 
@@ -145,7 +145,7 @@ The bottom surface of the thermal paddle was plated in approximately 13.6 \unit{
 
 \begin{figure}[h]
 \includegraphics[width=12cm,keepaspectratio]{images/section.jpg}
-\caption{Cross section of package. Pin 5/6 bond pads to the left, 7/8 to the right.}
+\caption{Cross section of package. Pin 5/6 bond pads to the left, 7/8 to the right. Mitutoyo 20x/0.42 objective, multi frame stitch.}
 \label{section}
 \end{figure}
 
@@ -205,8 +205,7 @@ The overall condition of the die after decapsulation was excellent, with almost 
 \label{pbond2}
 \end{figure}
 
-\FloatBarrier
-\pagebreak
+\clearpage
 \section{Process Analysis}
 
 The die is made on Microchip's in-house 160K wafer
@@ -217,7 +216,7 @@ KSRA-19MSVX727}} at Fab 4 in Gresham, OR.
 
 This is a planarized 350nm class process with three aluminum metal layers and two poly layers (Fig. \ref{xsec-seal}), supporting floating-gate embedded Flash memory. Vias and contacts are tungsten. Inspection of the seal ring in cross section clearly shows all three metal layers connected by vias to each other and the substrate, as well as poly. No connections to poly in the seal ring were visible in the cross section.
 
-All metal layers are approximately equal in thickness and spacing: approximately 1000 \unit{\nano\meter} thick and 800 \unit{\nano\meter} apart, with M1 approximately 1300 \unit{\nano\meter} above the substrate. Poly is approximately 425 \unit{\nano\meter} thick\footnote{Given the 300 \unit{\nano\meter} optical resolution of the microscope, there are large error bounds on all of these measurements.}.
+All metal layers are approximately equal in thickness and spacing: approximately 1000 \unit{\nano\meter} thick and 800 \unit{\nano\meter} apart, with M1 approximately 1300 \unit{\nano\meter} above the substrate. Poly is approximately 425 \unit{\nano\meter} thick\footnote{Given the 300 \unit{\nano\meter} optical resolution of the microscope, there are large error bounds on all of these measurements.}. The top barrier/adhesion layer was not clearly seen during the analysis. Bottom barrier was readily exposed during deprocessing and often was easier to image than the metal itself. No spectroscopic analysis of the bottom barrier was performed due to lack of the required laboratory capabilities, but the color was consistent with titanium nitride (TiN).
 
 \begin{figure}[h]
 \includegraphics[width=12cm,keepaspectratio]{images/xsec-seal.jpg}
@@ -257,10 +256,62 @@ Excessively long dummy fill lines (roughly 80 \unit{\micro\meter} and up) have s
 \label{dummyfill}
 \end{figure}
 
+\clearpage
+\section{Decapsulation and Deprocessing}
+
+Five devices were fully decapsulated with 70\% nitric acid to remove the package and bond wires.
+
+Two samples were deprocessed with a commercially available aqueous solution of unbuffered 1-3\% hydrofluoric acid\footnote{Whink rust stain remover. Concentration data is from the SDS; the author has not performed a titration to determine the actual concentration more precisely.} due to lack of availability of buffered oxide etch\footnote{The author has since acquired a 40\% ammonium fluoride solution and will be conducting tests with buffered etchants to see if improved deprocessing results are obtained with it.}. The first sample was used for preliminary etch rate characterization, while the second was used for all imagery in this report. The remaining three dice were held as reserves in the as-decapsulated state in case additional data was needed due to overetch, scratches, etc but have not been used as of this writing.
+
+A total of 27 etch passes (numbered 1 to 27) were performed, photographing on a Labsmore LIP-X1 CNC microscope platform after each pass. After 14 of the etch passes, mechanical cleaning operations (e.g. sonication) were performed to remove free-floating debris and a second imaging cycle (denoted with a ``B" suffix) was performed, for a total of 41 documented deprocessing steps.
+
+All 41 deprocessing steps were imaged at moderate resolution with a Mitutoyo 20x/0.42 objective. Each 20x scan consisted of approximately 42 (6 x 7 X/Y positions at a single focus level)\footnote{The exact number of tiles varied slightly due to variations in alignment of the sample on the microscope stage, which resulted in a $\pm 1$ tile jitter in array size in each axis from one scan to the next.} image tiles. Additionally, 22 of the deprocessing steps were also imaged at high resolution with a Mitutoyo 100x/0.90 objective. Each 100x scan consisted of approximately 13260 (30 x 34 X/Y positions at 13 focus levels) image tiles. The complete dataset including the cross section sample and all deprocessing stages was 203.5 GB and 369971 photos and required over 125 hours of microscope time to acquire.
+
+Several of the 20x overview scans are shown in this section as representative examples. These are reduced from the full resolution to avoid an overly large PDF; full resolution of all 20x scans as well as focus-stacked versions\footnote{Raw tiles have not been uploaded due to lack of a good sharing setup for multi-level imagery. The current focus stacks lose some contrast vs the raw tiles; all circuit tracings in this report used raw tiles hand-selected for the best contrast of the specific features of interest.} of the 100x scans is available \href{https://siliconprawn.org/map/microchip/pic12f683/}{on siliconprawn}. All 41 deprocessing steps, not just the ones shown in this section, were considered when choosing imagery for circuit extractions; due to the inherent nonuniformities of wet etch deprocessing sometimes a specific feature was most visible a few etch cycles before or after another feature on the same metal layer.
+
+\begin{itemize}
+\item As decapsulated (Fig. \ref{mz})
+\item Metal 3, etch cycle 6B (Fig. \ref{m3})
+\item Metal 2, etch cycle 11B (Fig. \ref{m2})
+\item Metal 1, etch cycle 17 (Fig. \ref{m1})
+\item Substrate, etch cycle 27B (Fig. \ref{substrate})
+\end{itemize}
+
+\begin{figure}[h]
+\includegraphics[width=16cm,keepaspectratio]{images/mz.jpg}
+\caption{Die overview as decapsulated. Mitutoyo 20x/0.42 objective, multi frame stitch.}
+\label{mz}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=16cm,keepaspectratio]{images/m3.jpg}
+\caption{Full die seen at metal 3 (etch cycle 6B). Mitutoyo 20x/0.42 objective, multi frame stitch.}
+\label{m3}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=16cm,keepaspectratio]{images/m2.jpg}
+\caption{Full die seen at metal 2 (etch cycle 11B). Mitutoyo 20x/0.42 objective, multi frame stitch.}
+\label{m2}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=16cm,keepaspectratio]{images/m1.jpg}
+\caption{Full die seen at metal 1 (etch cycle 17). Mitutoyo 20x/0.42 objective, multi frame stitch.}
+\label{m1}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=16cm,keepaspectratio]{images/substrate.jpg}
+\caption{Full die seen at substrate (etch cycle 27B) with shadows of poly in isolation areas. Mitutoyo 20x/0.42 objective, multi frame stitch.}
+\label{substrate}
+\end{figure}
+
 \FloatBarrier
 \pagebreak
 \section{Device Floorplan Analysis}
 
+\FloatBarrier
 \pagebreak
 \section{SRAM}
 
