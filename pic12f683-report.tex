@@ -38,12 +38,23 @@ All analysis and sample preparation was performed by the author using garage lab
 
 Sample preparation was limited to basic wet chemistry and optical microscopy, to make the project more fun and challenging and to push the limits of what could be done in a home setup. SEM/FIB, dry etch, precision polishing, industry reverse engineering software, and other advanced tools were deliberately not used, even if the author had access to them via work or friends.
 
+This report was produced as a companion to \href{https://www.youtube.com/watch?v=yw8KQuswcAE&list=PLBNA3N3RCc8oRO_tnl_lnhJU61hRJ6qbU&index=1}{a YouTube series} by the author, which includes video of sample preparation activities and narrated analysis as well as various background material helpful to novices interested in semiconductor reverse engineering. The report provides additional technical detail and high resolution imagery which did not lend itself well to the video format.
+
 This report is licensed under CC BY-ND 4.0 and the LaTeX source and images used in the report can be found
 \href{https://github.com/azonenberg/pic12f683-analysis}{on GitHub}.
 \end{abstract}
 
 \pagebreak
 \tableofcontents
+
+\pagebreak
+\section{Motivation}
+
+Why go through all this trouble? I'm not being paid to write this, none of my customers at work use this part, I haven't done a new design with it in years, and my YouTube channel isn't even monetized.
+
+In short, this is a combination of a nerdsnipe\footnote{\href{https://xkcd.com/356/}{XKCD 356}} and a homage to my roots - the first MCU I ever used as a brand-new student embedded developer in 2008, and the first MCU I ever broke the code protection on as a brand-new hardware reverse engineer in 2011. I've wanted to go back and study it in extreme detail ever since.
+
+Plus it's a convenient vintage part for this sort of project: old and large enough for full circuit analysis to be possible without SEM, but still a vaguely modern planarized standard cell architecture rather than ancient stuff made on Rubylith where every transistor looks different from the one next to it and metal layers bend and sag as they cross.
 
 \pagebreak
 \section{Device Overview}
@@ -56,6 +67,8 @@ It has 2048 14-bit instruction words of flash, 128 bytes of SRAM, and 256 bytes 
 
 It is available in four packages, all with eight pins (one power, one ground, and six I/Os): DIP (ordering code P), 3.9mm SOIC (SN), 4x4mm DFN (MD), and 6x5mm DFN (MF). Pin numbering between the packages is identical.
 
+Due to the extremely low pin count, in-circuit debug of the PIC12F683 is typically impractical (three of the six pins must be used for program/debug). A special in-circuit emulation device exists (only available on a special test fixture and not sold standalone) which breaks the debug signals out on separate bond pads allowing non-intrusive debug with full access to all six IOs. This emulation die is a separate mask set and will not be discussed further in this report.
+
 \pagebreak
 \section{Package Analysis}
 
@@ -65,16 +78,15 @@ The PIC12F683 is available in multiple packages; the subject of this report used
 
 A search of vendor PCNs was conducted, which suggested that numerous assembly sites (designated MP3A, MTAI, NSEB, GTK, LPI, UNIS, and MMT) were used to produce this part and it was not possible to identify with certainty which one was used for the samples under test without access to internal Microchip lot traceability information or supplier databases.
 
-A new PFAS-free die attach material ``QMI519" was qualified in September 2025\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnid=24234&fileName=PFAS\%20Elimination\%20and\%20Die\%20Attach_Explanation.pdf}{PCN CENO-16EGCZ399}} however the samples used for this analysis had 2023 week 21 date codes and thus presumably were using the older, PFAS-containing, die attach. One PCNs mentioned CRM1076DJ die attach and G770HCD mold compound\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnId=252&affectedcpns=pdf}{PCN CYER-19MGTD414}} for the 4x4 DFN; another mentioned 8600 die attach and G700LTD mold compound\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnid=6667&fileName=PCN_JAON-04FCXY806_Qual\%20Report.pdf}{PCN JAON-04FCXY806}} so any of these are likely candidates. The author's lab capabilities were not sufficient to determine with certainty which was used. Based on these and other PCNs the bond wire material was likely to be palladium coated copper and may or may not have a gold flash over the palladium plating, depending on which assembly site was used\footnote{In the author's experience, older generation PIC12F683s used gold ball bonding. The samples analyzed in this report were copper bonded and PCNs reference both CuPd and CuPdAu bond wire. Without access to SEM+EDS capabilities, it was not possible to detect the presence of the gold flash layer.}.
+A new PFAS-free die attach material ``QMI519" was qualified in September 2025\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnid=24234&fileName=PFAS\%20Elimination\%20and\%20Die\%20Attach_Explanation.pdf}{PCN CENO-16EGCZ399}} however the samples used for this analysis had 2023 week 21 date codes and thus presumably were using the older, PFAS-containing, die attach. One PCNs mentioned CRM1076DJ die attach and G770HCD mold compound\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnId=252&affectedcpns=pdf}{PCN CYER-19MGTD414}} for the 4x4 DFN; another mentioned 8600 die attach and G700LTD mold compound\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnid=6667&fileName=PCN_JAON-04FCXY806_Qual\%20Report.pdf}{PCN JAON-04FCXY806}} so any of these are likely candidates. The author's lab capabilities were not sufficient to determine with certainty which was used. Based on these and other PCNs the bond wire material was likely to be palladium coated copper and may or may not have a gold flash over the palladium plating, depending on which assembly site was used\footnote{In the author's experience, older generation PIC12F683s used gold ball bonding. The samples analyzed in this report were copper bonded and PCNs reference both CuPd and CuPdAu bond wire. Without access to SEM+EDS or similar high resolution spectroscopy capabilities, it was not possible to detect the presence or absence of the gold flash layer.}.
 
 \subsection{Package Overview}
 
-One sample was photographed at low magnification using a combination of through-objective and
-low-angle illumination to best highlight the various materials in the package with vastly different albedos
+One sample was photographed at low magnification using a combination of through-objective and low-angle illumination to best highlight the various materials in the package with vastly different albedos.
 
 The top side of the package (Fig. \ref{pkgtop}) was laser marked ``12F683 I/MD (e3) 2321 9BW" plus a pin 1 marker and had no other noteworthy features.
 
-The bottom side of the package (Fig. \ref{pkgbot}) had eight tin-plated copper solder lands plus a die attach/thermal paddle with a mitered corner to denote the pin 1 position. A small amount of deformation was noted at the outboard edges of the lands, consistent with smearing of the relatively soft copper alloy by the dicing saw during the singulation process. Witness marks (Fig. \ref{probe-witness}, \ref{probe-witness2}) consistent with impressions of probe/socket contacts during factory test, could be seen on each terminal. The witness marks consisted of two circular dots approximately 37 \unit{\micro\meter} in diameter and varied slightly in spacing, suggesting that they were the result of multiple contact events with a single contact per pin (or a socket with two individual contacts per pin) rather than a single forked contact.
+The bottom side of the package (Fig. \ref{pkgbot}) had eight tin-plated copper solder lands plus a die attach/thermal paddle with a mitered corner to denote the pin 1 position. A small amount of deformation was noted at the outboard edges of the lands, consistent with smearing of the relatively soft copper alloy by the dicing saw during the singulation process. Witness marks (Fig. \ref{probe-witness}, \ref{probe-witness2}), consistent with impressions of probe/socket contacts during factory test, could be seen on each terminal. The witness marks consisted of two circular dots approximately 37 \unit{\micro\meter} in diameter and varied slightly in spacing, suggesting that they were the result of multiple contact events with a single contact per pin (or a socket with two individual contacts per pin) rather than a single forked contact.
 
 \begin{figure}[h]
 \includegraphics[width=10cm,keepaspectratio]{images/pkgtop.jpg}
@@ -111,6 +123,14 @@ device). Final polishing used 1 \unit{\micro\meter} diamond and 50 \unit{\nano\m
 
 The polisher being used for the analysis did not have precision tip/tilt adjustment, so it was not possible to get the entire row of bond pads in view simultaneously. The sectioning plane (Fig. \ref{section-plane}) was approximately 1.2\degree off perpendicular to the die; providing excellent views of the pin 5 and 6 wire bonds (Fig. \ref{section}) as well as the metal stackup on the pin 7 and 8 bond pads, however the wire bonds on pins 7 and 8 were not captured by the section.
 
+The section plane was chosen to get as many bond pads as possible in view, however this did mean that the second bonds and solder lands on the leadframe were not visible. This was not judged sufficiently important to justify the effort of preparing a second section with a 90\degree perpendicular plane to the one shown here.
+
+The die was connected to the leadframe with copper ball bonds (Fig. \ref{bond}). Bond pads consisted of three layers of aluminum metallization with vias connecting all three layers at the perimeter. A small amount of metal squeeze-out was seen around the bonds, but did not appear to be excessive and there was no sign of damage or deformation to the lower metal layers in the pad structure.
+
+The die was approximately 200 \unit{\micro\meter} thick and mounted to a 200 \unit{\micro\meter} thick copper thermal paddle by a metal-filled organic adhesive, likely silver epoxy (Fig. \ref{die-attach}). The bond line was approximately 6.7 \unit{\micro\meter} thick and the fillet extended another 8.5 \unit{\micro\meter} above the bottom edge of the die at the left corner.
+
+The bottom surface of the thermal paddle was plated in approximately 13.6 \unit{\micro\meter} of tin (Fig. \ref{paddle-corner}). The plating significantly overhung the paddle at the edges and conformed to the surfaec of the molding compound in the overhang region, suggesting that the leadframe had been bare, or perhaps plated in a thin flash layer of some sort, prior to package assembly and then a thick tin layer was applied after overmolding. A very thin Cu-Sn intermetallic layer was barely visible at the interface but the resolution of the optical microscope (roughly 300 \unit{\nano\meter}) was insufficient to make any remotely accurate measurements of its thickness.
+
 \begin{figure}[h]
 \includegraphics[width=12cm,keepaspectratio]{images/mount2.jpg}
 \caption{Embedded package sample}
@@ -127,6 +147,24 @@ The polisher being used for the analysis did not have precision tip/tilt adjustm
 \includegraphics[width=12cm,keepaspectratio]{images/section.jpg}
 \caption{Cross section of package. Pin 5/6 bond pads to the left, 7/8 to the right.}
 \label{section}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=9cm,keepaspectratio]{images/bond.jpg}
+\caption{Pin 6 bond pad and ball bond. Mitutoyo 100x/0.90 objective.}
+\label{bond}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=9cm,keepaspectratio]{images/die-attach.jpg}
+\caption{Die attach adhesive and fillet along the left side of the die. Mitutoyo 100x/0.90 objective.}
+\label{die-attach}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=9cm,keepaspectratio]{images/paddle-corner.jpg}
+\caption{Corner of the thermal paddle showing tin plating and fillet}
+\label{paddle-corner}
 \end{figure}
 
 \FloatBarrier
@@ -151,6 +189,12 @@ The polisher being used for the analysis did not have precision tip/tilt adjustm
 The die is made on Microchip's in-house 160K wafer
 technology\footnote{\href{https://www.microchip.com/PCNWebAPI/api/pcn/DownloadPcnDocument?pcnId=10087&affectedcpns=pdf}{PCN
 KSRA-19MSVX727}} at Fab 4 in Gresham, OR.
+
+\begin{figure}[h]
+\includegraphics[width=12cm,keepaspectratio]{images/xsec-seal.jpg}
+\caption{Seal ring at edge of die}
+\label{xsec-seal}
+\end{figure}
 
 \pagebreak
 \section{Device Floorplan Analysis}
